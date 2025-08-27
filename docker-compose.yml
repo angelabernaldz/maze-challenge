@@ -1,0 +1,8 @@
+services:
+  api:
+    container_name: maze-challenge-api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
