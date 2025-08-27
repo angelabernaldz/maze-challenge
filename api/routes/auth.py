@@ -9,3 +9,14 @@ def register():
 @router.post('/login')
 def login():
     return {'Message': 'user logged in'}
+
+@router.post('/logout')
+def logout():
+    return {'Message': 'user logged out'}
+
+
+
+
+
+
+

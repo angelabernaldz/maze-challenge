@@ -1,0 +1,16 @@
+{
+    "editor.quickSuggestions": {
+    "other": false,
+    "comments": false,
+    "strings": false
+},
+"editor.suggestOnTriggerCharacters": false,
+"editor.suggest.showWords": false,
+"python.languageServer": "Pylance",
+"python.analysis.autoImportCompletions": false,
+"python.analysis.completeFunctionParens": false,
+"editor.suggest.showMethods": false,
+"editor.suggest.showFunctions": false,
+"editor.suggest.showVariables": false,
+"editor.suggest.showSnippets": false
+}
