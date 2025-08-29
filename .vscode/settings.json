@@ -1,16 +1,17 @@
 {
     "editor.quickSuggestions": {
-    "other": false,
-    "comments": false,
-    "strings": false
-},
-"editor.suggestOnTriggerCharacters": false,
-"editor.suggest.showWords": false,
-"python.languageServer": "Pylance",
-"python.analysis.autoImportCompletions": false,
-"python.analysis.completeFunctionParens": false,
-"editor.suggest.showMethods": false,
-"editor.suggest.showFunctions": false,
-"editor.suggest.showVariables": false,
-"editor.suggest.showSnippets": false
+        "other": true,      // ahora sugiere variables y funciones
+        "comments": false,
+        "strings": false
+    },
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.suggest.showWords": true,
+    "editor.suggest.showMethods": true,
+    "editor.suggest.showFunctions": true,
+    "editor.suggest.showVariables": true,
+    "editor.suggest.showSnippets": false,  // opcional: no mostrar snippets
+    "python.languageServer": "Pylance",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true
 }
+
