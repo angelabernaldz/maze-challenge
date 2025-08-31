@@ -1,11 +1,24 @@
 import { Link } from 'react-router-dom'
+import logic from '../logic/index.js'
+import { useNavigate } from 'react-router-dom'
 
 function RegisterForm() {
+
+    const navigate = useNavigate()
 
     const sendLoginForm = (event) => {
         event.preventDefault()
 
         const {username, email, password, repeatPassword} = event.target // get data to be sent to back end
+
+        try {
+            logic.registerUser(username.value, email.value, password.value)
+            .then(() => {
+                navigate("/login")
+            })
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     return (

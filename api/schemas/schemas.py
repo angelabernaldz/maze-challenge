@@ -4,8 +4,13 @@ from datetime import datetime
 from typing import Any
 
 
-class User(BaseModel):
+class UserRegister(BaseModel):
     username: str
+    email: EmailStr
+    password: str
+
+
+class UserLogIn(BaseModel):
     email: EmailStr
     password: str
 

@@ -1,9 +1,9 @@
 import { LoginForm } from '../../components'
 
-function Login () {
+function Login ({ onUserLoggedIn }) {
     return (
         <div className="w-screen h-screen flex justify-center items-center">
-            <LoginForm />
+            <LoginForm onUserLoggedIn={onUserLoggedIn}/>
         </div>
     )
 }

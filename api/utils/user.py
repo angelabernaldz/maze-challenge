@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 from schemas.models import UserModel
-from schemas.schemas import User
+from schemas.schemas import UserRegister
 from utils.security import hash_password
 
 
-def save_user_to_db(db: Session, user: User):
+def save_user_to_db(db: Session, user: UserRegister):
 
     hashed_pw = hash_password(user.password)
 

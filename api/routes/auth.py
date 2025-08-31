@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session 
-from schemas.schemas import User
+from schemas.schemas import UserRegister, UserLogIn
 from schemas.models import UserModel
 from database import get_db
 import jwt
@@ -12,7 +12,7 @@ router = APIRouter(prefix='/auth')
 
 
 @router.post('/register', status_code = 201)
-def register(user: User, db: Session = Depends(get_db)):
+def register(user: UserRegister, db: Session = Depends(get_db)):
 
     existing_user = db.query(UserModel).filter(UserModel.email == user.email).first()
 
@@ -32,15 +32,15 @@ def register(user: User, db: Session = Depends(get_db)):
 
 
 @router.post('/login')
-def login(email: str, password: str, db: Session = Depends(get_db)):
+def login(request: UserLogIn, db: Session = Depends(get_db), status_code=200):
     # need to check that user exists and that password matches password in db
-    user = db.query(UserModel).filter(UserModel.email == email).first()
+    user = db.query(UserModel).filter(UserModel.email == request.email).first()
 
     if not user:
         raise HTTPException(status_code = status.HTTP_401_UNAUTHORIZED, detail='Invalid email')
     
     # Verify password
-    if not verify_password(password, user.password):
+    if not verify_password(request.password, user.password):
         raise HTTPException(status_code = status.HTTP_401_UNAUTHORIZED, detail='Invalid password')
     
     token = jwt.encode({"payload": str(user.id)},
