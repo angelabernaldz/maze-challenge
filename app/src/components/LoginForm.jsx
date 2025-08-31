@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function LoginForm() {
 
     const sendLoginForm = (event) => {
@@ -18,6 +20,7 @@ function LoginForm() {
                 <div className="mb-6">
                     <input
                         type="email"
+                        id="email"
                         placeholder="Enter your email"
                         className="w-full h-12 p-4 border border-gray-300 rounded-2xl text-xl focus:outline-none focus:ring-4 focus:ring-blue-400 transition"
                         required
@@ -27,6 +30,7 @@ function LoginForm() {
                 <div className="mb-8">
                     <input
                         type="password"
+                        id="password"
                         placeholder="Enter your password"
                         className="w-full h-12 p-4 border border-gray-300 rounded-2xl text-xl focus:outline-none focus:ring-4 focus:ring-blue-400 transition"
                         required
@@ -35,14 +39,20 @@ function LoginForm() {
 
                 <button
                     type="submit"
+                    id="submit"
                     className="w-full py-4 bg-blue-500 text-white text-2xl font-bold rounded-2xl hover:bg-blue-600 transition"
                     >
                     Log In
                 </button>
 
                 <p className="mt-6 text-gray-500 text-lg">
-                Don't have an account?{" "}
-                <span className="text-blue-500 cursor-pointer font-semibold">Register</span>
+                    Don't have an account?{" "}
+                <Link 
+                to="/register"
+                    className="text-blue-500 cursor-pointer font-semibold"
+                >
+                    Register
+                </Link>
                 </p>
             </form>
         </div>
