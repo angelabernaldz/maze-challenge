@@ -4,5 +4,7 @@ sqlalchemy
 psycopg2-binary
 pydantic[email]
 alembic
-python-jose
+PyJWT
 passlib[bcrypt]
+bcrypt==4.0.1
+
