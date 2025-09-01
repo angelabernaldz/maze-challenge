@@ -22,6 +22,11 @@ class Puzzle(BaseModel):
     created_at: Optional[datetime]
 
 
+class AttemptCreate(BaseModel):
+    user_id: int
+    moves: str
+
+
 class Attempt(BaseModel):
     id: Optional[int]
     user_id: int

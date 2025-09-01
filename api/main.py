@@ -2,10 +2,14 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.auth import router as auth_router
+from routes.puzzle import router as puzzle_router
 from dotenv import load_dotenv
+
+load_dotenv()  
 
 app = FastAPI()
 app.include_router(auth_router)
+app.include_router(puzzle_router)
 
 origins = [os.getenv("FRONTEND_URL")]
 
@@ -16,7 +20,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.get("/")
-def root():
-    return {"message": "Backend funcionando 🚀"}

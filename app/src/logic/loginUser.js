@@ -1,5 +1,3 @@
-import { data } from "react-router-dom"
-
 const loginUser = (email, password) => {
     // TODO: validate user data in form
 
@@ -8,17 +6,14 @@ const loginUser = (email, password) => {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ email, password})
     })
-    .then(res => res.json().then(data => ({ status: res.status, data })))
-    .then(({ status, body }) => {
-        if (status == 200) {
-            if (data.access_token) {
-                sessionStorage.setItem("token", data.access_token)
-            }
-            return data
-        } else {
-            throw new Error(data.detail || "Server error")
-        }
+    .then((res) => {
+        if (res.status == 200) return res.json()
+        .then(body => sessionStorage.setItem('token', body.access_token))
+        return res.json()
     })
+    .catch((error) => {
+        throw error
+    }) 
 }
 
 export default loginUser

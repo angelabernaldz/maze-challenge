@@ -14,8 +14,8 @@ function LoginForm({ onUserLoggedIn }) {
         try {
             logic.loginUser(email.value, password.value)
             .then(() => {
-                navigate("/me")
-                onUserLoggedIn
+                navigate("/puzzles")
+                onUserLoggedIn()
             })
         } catch(error) {
             console.log(error) 
