@@ -1,11 +1,17 @@
-import getAllPuzzles from './getAllPuzzles.jsx'
+import getAllPuzzles from './getAllPuzzles.js'
+import getPuzzleById from './getPuzzleById.js'
+import getUser from './getUser.js'
 import isUserLoggedIn from './isUserLoggedIn.js'
 import loginUser from './loginUser.js'
 import registerUser from './registerUser.js'
+import submitAttempt from './submitAttempt.js'
 
 export default {
     getAllPuzzles,
+    getPuzzleById,
+    getUser,
     isUserLoggedIn,
     loginUser,
-    registerUser
+    registerUser,
+    submitAttempt
 }

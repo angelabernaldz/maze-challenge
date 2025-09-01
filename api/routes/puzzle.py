@@ -5,6 +5,7 @@ from database.database import get_db
 from schemas.models import PuzzleModel, AttemptModel
 from datetime import datetime, timezone
 from schemas.schemas import AttemptCreate, Puzzle
+from utils.puzzle import verify_puzzle_solution
 
 router = APIRouter(prefix="/puzzles")
 
@@ -14,13 +15,21 @@ def get_all_puzzles(db: Session =  Depends(get_db)):
     return puzzles
 
 
+@router.get("/{puzzle_id}", response_model=Puzzle, status_code=status.HTTP_200_OK)
+def get_puzzle_by_id(puzzle_id: int, db: Session =  Depends(get_db)):
+    puzzle = db.query(PuzzleModel).filter(PuzzleModel.id == puzzle_id).first()
+    if not puzzle:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Puzzle not found")
+    return puzzle
+
+
 @router.post("/{puzzle_id}/attempts", status_code=status.HTTP_201_CREATED)
 def submit_attempt(puzzle_id: int, attempt: AttemptCreate, db: Session = Depends(get_db)):
-    puzzle = db.query(PuzzleModel).filter(PuzzleModel.id == puzzle_id)
+    puzzle = db.query(PuzzleModel).filter(PuzzleModel.id == puzzle_id).first()
     if not puzzle:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Puzzle not found")
 
-    success = True # need to check if attempt is successful or not (call auxiliary function)
+    success = verify_puzzle_solution(input_moves = attempt.moves, correct_moves = puzzle.solution) # need to check if attempt is successful or not (call auxiliary function)
 
     new_attempt = AttemptModel(
         user_id=attempt.user_id, 

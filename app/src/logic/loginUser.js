@@ -6,10 +6,14 @@ const loginUser = (email, password) => {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ email, password})
     })
-    .then((res) => {
-        if (res.status == 200) return res.json()
-        .then(body => sessionStorage.setItem('token', body.access_token))
-        return res.json()
+    .then(res => res.json().then(body => ({ status: res.status, body }))) 
+    .then(({ status, body }) => {
+        if (status === 200) {
+            sessionStorage.setItem('token', body.access_token)
+            return body
+        } else {
+            throw new Error(`Error authenticating user: ${status}`)
+        }
     })
     .catch((error) => {
         throw error

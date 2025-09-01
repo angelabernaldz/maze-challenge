@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean, JSON
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime, timezone
@@ -20,6 +20,7 @@ class PuzzleModel(Base):
     title = Column(String, nullable=False)
     description = Column(String)
     grid = Column(String)
+    solution = Column(JSON) # to then validate the sequence entered by user 
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     attempts = relationship("AttemptModel", back_populates="puzzle") 

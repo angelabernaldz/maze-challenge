@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 from typing import Any
 
@@ -20,12 +20,13 @@ class Puzzle(BaseModel):
     title: str
     description: str
     grid: Any  # JSON -> may be dict or list
+    solution: Optional[Any]  # JSON -> list of movements
     created_at: Optional[datetime]
 
 
 class AttemptCreate(BaseModel):
     user_id: int
-    moves: str
+    moves: List[str]
 
 
 class Attempt(BaseModel):
