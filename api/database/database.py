@@ -13,6 +13,7 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
 
+# TODO: remove populating DB with puzzles, only to be done once 
 db = SessionLocal()
 try:
     populate_puzzles(db)  

@@ -17,7 +17,8 @@ class UserLogIn(BaseModel):
 
 class Puzzle(BaseModel):
     id: Optional[int]
-    name: str
+    title: str
+    description: str
     grid: Any  # JSON -> may be dict or list
     created_at: Optional[datetime]
 

@@ -1,13 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from typing import List
 from sqlalchemy.orm import Session 
 from database.database import get_db
 from schemas.models import PuzzleModel, AttemptModel
 from datetime import datetime, timezone
-from schemas.schemas import AttemptCreate
+from schemas.schemas import AttemptCreate, Puzzle
 
 router = APIRouter(prefix="/puzzles")
 
-@router.get("/", status_code=status.HTTP_200_OK)
+@router.get("/", response_model=List[Puzzle], status_code=status.HTTP_200_OK)
 def get_all_puzzles(db: Session =  Depends(get_db)):
     puzzles = db.query(PuzzleModel).all()
     return puzzles
