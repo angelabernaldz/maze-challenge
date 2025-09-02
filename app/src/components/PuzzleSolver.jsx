@@ -41,7 +41,7 @@ function PuzzleSolver({ puzzle }) {
         return
     }
     setMoves(prev => {
-      if (prev.length >= 15) return prev
+      if (prev.length >= 20) return prev
       return [...prev, move]
     })
   } 
@@ -74,8 +74,8 @@ function PuzzleSolver({ puzzle }) {
   const cellSize = 85
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4">
-      <div className="text-center w-full max-w-3xl">
+    <div className="min-h-screen flex flex-col justify-start items-center m-0">
+      <div className="text-center w-full max-w-3xl p-0">
         <h2 className="text-3xl font-bold mb-4">Maze Puzzle: {puzzle.title}</h2>
         <div className="flex justify-center mb-4">
           <div
@@ -111,7 +111,7 @@ function PuzzleSolver({ puzzle }) {
 
         <p className="mt-2 text-gray-700 text-xl">{puzzle.description}</p>
 
-        <div className="mt-4 text-xl text-white mb-2 text-left">
+        <div className="mt-4 text-xl text-white mb-2 text-left mr-8">
           <strong>Movements:</strong> {moves.join(", ")}
         </div>
 

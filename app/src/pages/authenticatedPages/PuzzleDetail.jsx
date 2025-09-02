@@ -1,4 +1,4 @@
-import { PuzzleSolver, Header } from '../../components'
+import { PuzzleSolver, Header, Instructions } from '../../components'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react' 
 import logic from '../../logic'
@@ -29,11 +29,19 @@ function PuzzleDetail({ onUserLoggedOut }) {
     if (!puzzle) return <p>Loading puzzle...</p>
 
     return (
-        <div className="min-h-screen flex flex-col">
-            <Header onUserLoggedOut={onUserLoggedOut} />
-            <div className="flex w-screen justify-center items-center -mt-16 overflow-hidden">
-                <PuzzleSolver puzzle={puzzle}/>
+        <div className="min-h-screen w-screen flex flex-col">
+        <Header onUserLoggedOut={onUserLoggedOut} />
+
+        <div className="flex flex-1 w-full justify-center items-start gap-8 px-4 mt-6">
+            <div className="md:w-8/12 w-full max-w-3xl">
+            <PuzzleSolver puzzle={puzzle} />
             </div>
+
+            <div className="hidden md:block md:w-4/12">
+            <Instructions />
+            </div>
+
+        </div>
         </div>
     )
 }

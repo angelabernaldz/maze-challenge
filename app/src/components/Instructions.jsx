@@ -1,6 +1,6 @@
 function Instructions () {
   return (
-    <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg max-w-md mx-auto md:mx-0 md:ml-6">
+    <div className="bg-blue-50 border-l-4 p-2 rounded-lg w-full">
       <h2 className="text-3xl font-bold mb-4 text-blue-700 flex items-center">
         🧩 Maze Puzzle Instructions
       </h2>
