@@ -28,22 +28,24 @@ function PuzzleDetail({ onUserLoggedOut }) {
 
     if (!puzzle) return <p>Loading puzzle...</p>
 
-    return (
-        <div className="min-h-screen w-screen flex flex-col">
-        <Header onUserLoggedOut={onUserLoggedOut} />
+return (
+  <div className="h-screen w-screen flex flex-col">
+    <Header onUserLoggedOut={onUserLoggedOut} />
 
-        <div className="flex flex-1 w-full justify-center items-start gap-8 px-4 mt-6">
-            <div className="md:w-8/12 w-full max-w-3xl">
-            <PuzzleSolver puzzle={puzzle} />
-            </div>
+    {/* PuzzleSolver */}
+    <div className="flex flex-1 w-full justify-center items-start mt-8 overflow-auto">
+      <div className="md:w-8/12 w-full max-w-full px-0">
+        <PuzzleSolver puzzle={puzzle} />
+      </div>
 
-            <div className="hidden md:block md:w-4/12">
-            <Instructions />
-            </div>
+      {/* Instructions */}
+      <div className="hidden md:block md:w-4/12 md:ml-8 px-0 mr-6">
+        <Instructions />
+      </div>
+    </div>
+  </div>
+)
 
-        </div>
-        </div>
-    )
 }
 
 export default PuzzleDetail

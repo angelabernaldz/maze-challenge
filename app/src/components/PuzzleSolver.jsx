@@ -1,24 +1,17 @@
 import { useEffect, useState } from 'react'
 import logic from '../logic'
+import { cellColor, moveToArrow } from '../utils/puzzleHelpers.jsx'
 
 function PuzzleSolver({ puzzle }) {
   const maze = puzzle.grid
   const [moves, setMoves] = useState([])
   const [attemptSuccess, setAttemptSuccess] = useState(null)
 
-  const cellColor = (cell) => {
-    switch(cell) {
-      case "S": return "#4ade80"   // green start
-      case "E": return "#f87171"   // red exit
-      case "K": return "#facc15"   // yellow key
-      case "D": return "#60a5fa"   // blue door
-      case "P1":
-      case "P2": return "#a78bfa"  // purple portals
-      case "#": return "#333"      // wall
-      case ".": return "#fff"      // empty
-      default: return "#fff"
-    }
-  }
+  const [userStats, setUserStats] = useState({
+    totalAttempts: 0,
+    totalSuccess: 0,
+    totalFails: 0
+  })
 
   const handleKeyDown = (event) => {
     event.preventDefault()
@@ -52,7 +45,6 @@ function PuzzleSolver({ puzzle }) {
   }, [])
 
   const handleSubmit = () => {
-    console.log('Here we send movs to back end')
     logic.getUser()
     .then(user => {
       const attempt = {
@@ -64,6 +56,12 @@ function PuzzleSolver({ puzzle }) {
       .then(createdAttempt => {
         setAttemptSuccess(createdAttempt.success)
           console.log(createdAttempt, 'created attemtp')
+          setUserStats(prev => ({
+            totalAttempts: prev.totalAttempts + 1,
+            totalSuccess: prev.totalSuccess + (createdAttempt.success ? 1 : 0),
+            totalFails: prev.totalFails + (createdAttempt.success ? 0 : 1)
+          }))
+          setMoves([])
       })
       .catch(err => {
         console.error('Error submitting attempt', err)
@@ -73,59 +71,78 @@ function PuzzleSolver({ puzzle }) {
 
   const cellSize = 85
 
-  return (
-    <div className="min-h-screen flex flex-col justify-start items-center m-0">
-      <div className="text-center w-full max-w-3xl p-0">
-        <h2 className="text-3xl font-bold mb-4">Maze Puzzle: {puzzle.title}</h2>
-        <div className="flex justify-center mb-4">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: `repeat(${maze[0].length}, ${cellSize}px)`,
-              gap: "6px",
-            }}
-          >
-            {maze.map((row, rowIndex) =>
-              row.map((cell, colIndex) => (
-                <div
-                  key={`${rowIndex}-${colIndex}`}
-                  style={{
-                    width: cellSize,
-                    height: cellSize,
-                    backgroundColor: cellColor(cell),
-                    borderRadius: 4,
-                    border: "1px solid #ccc",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontWeight: "bold",
-                    color: "#000",
-                  }}
-                >
-                  {cell !== "." && cell}
-                </div>
-              ))
-            )}
-          </div>
+return (
+  <div className="flex flex-col justify-start items-center min-h-0 w-full">
+    {/* Puzzle container */}
+    <div className="text-center w-full max-w-3xl p-0">
+      <h2 className="text-3xl font-bold mb-4">Maze Puzzle: {puzzle.title}</h2>
+
+      <div className="flex mb-4 justify-start items-center">
+        {/* Statistics */}
+        <div className="flex flex-col justify-center text-left text-white mr-6">
+          <h3 className="text-3xl font-bold mb-2">Statistics</h3>
+          <div className="text-2xl">🟢 Attempts: {userStats.totalAttempts}</div>
+          <div className="text-2xl">✅ Success: {userStats.totalSuccess}</div>
+          <div className="text-2xl">❌ Fails: {userStats.totalFails}</div>
         </div>
 
-        <p className="mt-2 text-gray-700 text-xl">{puzzle.description}</p>
-
-        <div className="mt-4 text-xl text-white mb-2 text-left mr-8">
-          <strong>Movements:</strong> {moves.join(", ")}
-        </div>
-
-        <div className="flex justify-center">
-          <button
-            onClick={handleSubmit}
-            className="mt-2 p-2 text-xl bg-blue-500 text-white rounded"
-          >
-            Submit
-          </button>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${maze[0].length}, ${cellSize}px)`,
+            gap: "6px",
+            marginLeft: "120px", 
+          }}
+        >
+          {maze.map((row, rowIndex) =>
+            row.map((cell, colIndex) => (
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                style={{
+                  width: cellSize,
+                  height: cellSize,
+                  backgroundColor: cellColor(cell),
+                  borderRadius: 4,
+                  border: "1px solid #ccc",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                  color: "#000",
+                }}
+              >
+                {cell !== "." && cell}
+              </div>
+            ))
+          )}
         </div>
       </div>
+
+      <p className="mt-2 text-gray-700 text-xl">{puzzle.description}</p>
+
+      <div className="mt-4 text-xl text-white mb-4 text-left mr-8">
+        <strong>Movements:</strong>   
+        {moves.map((m, i) => (
+          <span 
+            key={i} 
+            className="mx-1">{moveToArrow(m)}
+          </span>
+        ))}
+      </div>
+
+      <div className="flex justify-center mt-2">
+        <button
+          onClick={handleSubmit}
+          className="btn btn-ghost px-6 py-2 text-white rounded-lg bg-blue-400 text-xl hover:scale-105"
+        >
+          Submit solution
+        </button>
+      </div>
     </div>
-  )
+  </div>
+)
+
+
 }
 
 export default PuzzleSolver
