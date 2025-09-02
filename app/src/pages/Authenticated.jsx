@@ -6,7 +6,7 @@ function Authenticated({ onUserLoggedOut }) {
         <div className="container">
             <Routes>
                 <Route path="/puzzles" element={<PuzzlesList onUserLoggedOut={onUserLoggedOut}/>} />
-                <Route path="/puzzles/:puzzleId" element={<PuzzleDetail />}/>
+                <Route path="/puzzles/:puzzleId" element={<PuzzleDetail onUserLoggedOut={onUserLoggedOut}/>}/>
             </Routes>
         </div>
     </>

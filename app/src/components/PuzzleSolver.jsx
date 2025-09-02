@@ -40,8 +40,11 @@ function PuzzleSolver({ puzzle }) {
       default: 
         return
     }
-    setMoves((prev) => [...prev, move])
-  }
+    setMoves(prev => {
+      if (prev.length >= 15) return prev
+      return [...prev, move]
+    })
+  } 
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)
@@ -68,52 +71,59 @@ function PuzzleSolver({ puzzle }) {
     })
   }
 
-  const cellSize = 100
+  const cellSize = 85
 
   return (
-    <div>
-      <h2 className="text-4xl font-bold mb-2">Maze Puzzle: {puzzle.title}</h2>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${maze[0].length}, ${cellSize}px)`,
-          gap: "6px",
-        }}
-      >
-        {maze.map((row, rowIndex) =>
-          row.map((cell, colIndex) => (
-            <div
-              key={`${rowIndex}-${colIndex}`}
-              style={{
-                width: cellSize,
-                height: cellSize,
-                backgroundColor: cellColor(cell),
-                borderRadius: 4,
-                border: "1px solid #ccc",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: "bold",
-                color: "#000"
-              }}
-            >
-              {cell !== "." && cell}
-            </div>
-          ))
-        )}
-      </div>
-      <p className="mt-2 text-gray-700 text-xl">{puzzle.description}</p>
+    <div className="min-h-screen flex flex-col justify-center items-center px-4">
+      <div className="text-center w-full max-w-3xl">
+        <h2 className="text-3xl font-bold mb-4">Maze Puzzle: {puzzle.title}</h2>
+        <div className="flex justify-center mb-4">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${maze[0].length}, ${cellSize}px)`,
+              gap: "6px",
+            }}
+          >
+            {maze.map((row, rowIndex) =>
+              row.map((cell, colIndex) => (
+                <div
+                  key={`${rowIndex}-${colIndex}`}
+                  style={{
+                    width: cellSize,
+                    height: cellSize,
+                    backgroundColor: cellColor(cell),
+                    borderRadius: 4,
+                    border: "1px solid #ccc",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                    color: "#000",
+                  }}
+                >
+                  {cell !== "." && cell}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
 
-      <div className="mt-4">
-        <strong>Movimientos:</strong> {moves.join(", ")}
-      </div>
+        <p className="mt-2 text-gray-700 text-xl">{puzzle.description}</p>
 
-      <button
-        onClick={handleSubmit}
-        className="mt-2 p-2 bg-blue-500 text-white rounded"
-      >
-        Submit
-      </button>
+        <div className="mt-4 text-xl text-white mb-2 text-left">
+          <strong>Movements:</strong> {moves.join(", ")}
+        </div>
+
+        <div className="flex justify-center">
+          <button
+            onClick={handleSubmit}
+            className="mt-2 p-2 text-xl bg-blue-500 text-white rounded"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

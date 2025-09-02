@@ -1,9 +1,9 @@
-import { PuzzleSolver } from '../../components'
+import { PuzzleSolver, Header } from '../../components'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react' 
 import logic from '../../logic'
 
-function PuzzleDetail() {
+function PuzzleDetail({ onUserLoggedOut }) {
 
     const { puzzleId } = useParams() // puzzleId is obtained from the route
     const [puzzle, setPuzzle] = useState(null)
@@ -29,8 +29,11 @@ function PuzzleDetail() {
     if (!puzzle) return <p>Loading puzzle...</p>
 
     return (
-        <div>
-            <PuzzleSolver puzzle={puzzle}/>
+        <div className="min-h-screen flex flex-col">
+            <Header onUserLoggedOut={onUserLoggedOut} />
+            <div className="flex w-screen justify-center items-center -mt-16 overflow-hidden">
+                <PuzzleSolver puzzle={puzzle}/>
+            </div>
         </div>
     )
 }

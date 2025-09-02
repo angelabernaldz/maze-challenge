@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 puzzles_data = [
     {
         "title": "Key Door Unique 5x5",
-        "description": "Pick up the key and unlock the door to reach the exit. Solo hay un camino posible.",
+        "description": "Pick up the key and unlock the door to reach the exit.",
         "grid": [
             ["S", "#", "#", "#", "#"],
             [".", ".", ".", "K", "#"],
