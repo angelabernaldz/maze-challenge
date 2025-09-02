@@ -14,7 +14,7 @@ function LogOutButton({ onUserLoggedOut }) {
     return (
         <div className='w-full h-full'>
             <button
-                className='btn btn-ghost px-6 py-2 text-white rounded-lg text-xl  hover:scale-105'
+                className='btn btn-ghost px-6 py-2 text-white bg-red-400 rounded-lg text-xl hover:scale-105 hover:bg-red-300'
                 onClick={handleLogout}
             >
                 Log out

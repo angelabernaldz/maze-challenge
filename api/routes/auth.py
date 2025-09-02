@@ -66,7 +66,7 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
     
 
-@router.get("/me")
+@router.get("/me", status_code=status.HTTP_200_OK)
 def read_current_user(user_id: str = Depends(get_current_user), db: Session = Depends(get_db)):
     user = db.query(UserModel).filter(UserModel.id == int(user_id)).first()
 

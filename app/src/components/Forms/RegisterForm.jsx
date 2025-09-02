@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logic from '../logic/index.js'
+import logic from '../../logic/index.js'
 import { useNavigate } from 'react-router-dom'
 
 function RegisterForm() {

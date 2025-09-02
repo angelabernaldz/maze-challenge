@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 # Success only if E (Exit) is reached
 puzzles_data = [
     {
-        "title": "Key Door Unique 5x5",
+        "title": "Key Door Unique",
         "description": "Pick up the key and unlock the door to reach the exit.",
         "grid": [
             ["S", "#", "#", "#", "#"],
@@ -48,7 +48,6 @@ puzzles_data = [
         "solution": ["down","down","right","right","up","right","up","right","right","right"]
     }
 ]
-
 
 
 def populate_puzzles(db):

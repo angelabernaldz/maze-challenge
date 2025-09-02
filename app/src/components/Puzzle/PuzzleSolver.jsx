@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import logic from '../logic'
-import { cellColor, moveToArrow } from '../utils/puzzleHelpers.jsx'
+import logic from '../../logic/index.js'
+import { cellColor, moveToArrow } from '../../utils/puzzleHelpers.jsx'
 
 function PuzzleSolver({ puzzle }) {
   const maze = puzzle.grid
@@ -51,11 +51,9 @@ function PuzzleSolver({ puzzle }) {
         user_id: user.id,
         moves: moves,
       }
-      console.log(attempt, 'ATTEMPT TO SUBMIT')
       logic.submitAttempt(puzzle.id, attempt)
       .then(createdAttempt => {
         setAttemptSuccess(createdAttempt.success)
-          console.log(createdAttempt, 'created attemtp')
           setUserStats(prev => ({
             totalAttempts: prev.totalAttempts + 1,
             totalSuccess: prev.totalSuccess + (createdAttempt.success ? 1 : 0),

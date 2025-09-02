@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
-from schemas.models import Base
+from schemas.models import Base, PuzzleModel
 from database.populate_puzzles import populate_puzzles
 import os
 
@@ -16,7 +16,9 @@ Base.metadata.create_all(bind=engine)
 # TODO: remove populating DB with puzzles, only to be done once 
 db = SessionLocal()
 try:
-    populate_puzzles(db)  
+    puzzle_count = db.query(PuzzleModel).count()
+    if puzzle_count == 0:
+        populate_puzzles(db)
 finally:
     db.close()
 
