@@ -14,18 +14,20 @@ function Leaderboard({ onUserLoggedOut }) {
     }, [])
 
     return (
-    <div className="p-4 w-screen h-screen">
-        <Header onUserLoggedOut={onUserLoggedOut}/>
-        
-        <div className="flex justify-center gap-4 mt-4">
-        {leadearboardData.map((puzzle) => (
-            <div key={puzzle.puzzle_id} className="w-1/3 max-w-sm">
-            <LeaderBoardTable puzzle={puzzle}/>
-            </div>
-        ))}
+  <div className="min-h-screen flex flex-col">
+    <Header onUserLoggedOut={onUserLoggedOut} />
+
+    <div className="flex-1 w-screen flex flex-row justify-start">
+      {leadearboardData.map((puzzle) => (
+        <div key={puzzle.puzzle_id} className="w-full m-4">
+          <LeaderBoardTable puzzle={puzzle} />
         </div>
+      ))}
     </div>
-    )
+  </div>
+)
+
+
 }
 
 export default Leaderboard

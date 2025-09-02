@@ -11,9 +11,6 @@ function RegisterForm() {
 
         const {username, email, password, repeatPassword} = event.target // get data to be sent to back end
 
-        if (password !== repeatPassword)
-            throw new Error("Passwords do not match")
-
         try {
             logic.registerUser(username.value, email.value, password.value)
             .then(() => {
