@@ -28,8 +28,8 @@ function LoginForm({ onUserLoggedIn }) {
                 onSubmit={sendLoginForm}
                 className="bg-white p-16 rounded-3xl shadow-2xl w-full max-w-md text-center"
             >
-                <h1 className="text-5xl font-extrabold mb-4 text-gray-800">Welcome Back</h1>
-                <p className="text-gray-600 mb-10 text-2xl">Log in to access your account</p>
+                <h1 className="text-4xl font-extrabold mb-4 text-blue-600">🧩 PuzzleBreaker</h1>
+                <p className="text-gray-600 mb-6 text-2xl">Log in to access your account</p>
 
                 <div className="mb-6">
                     <input

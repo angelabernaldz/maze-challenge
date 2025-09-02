@@ -18,11 +18,13 @@ def get_leaderboard(db: Session):
             UserModel.username,
             func.count(AttemptModel.id).label("attempts"),
             func.sum(func.cast(AttemptModel.success, Integer)).label("success"),
+            
             func.sum(func.cast(~AttemptModel.success, Integer)).label("fails")
         )
         .join(UserModel, UserModel.id == AttemptModel.user_id)
         .join(PuzzleModel, PuzzleModel.id == AttemptModel.puzzle_id)
         .group_by(AttemptModel.puzzle_id, PuzzleModel.title, AttemptModel.user_id, UserModel.username)
+        .order_by(AttemptModel.puzzle_id, func.sum(func.cast(AttemptModel.success, Integer)).desc())
         .all()
     )
 

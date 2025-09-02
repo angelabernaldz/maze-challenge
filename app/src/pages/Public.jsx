@@ -6,6 +6,7 @@ function Public({ onUserLoggedIn }) {
   return <>
         <div className="container">
             <Routes>
+                <Route path="/" element={<Login onUserLoggedIn={onUserLoggedIn}/>} />
                 <Route path="/login" element={<Login onUserLoggedIn={onUserLoggedIn}/>} />
                 <Route path="/register" element={<Register />} />
             </Routes>

@@ -11,6 +11,9 @@ function RegisterForm() {
 
         const {username, email, password, repeatPassword} = event.target // get data to be sent to back end
 
+        if (password !== repeatPassword)
+            throw new Error("Passwords do not match")
+
         try {
             logic.registerUser(username.value, email.value, password.value)
             .then(() => {
@@ -27,8 +30,8 @@ function RegisterForm() {
             onSubmit={sendLoginForm}
             className="bg-white p-16 rounded-3xl shadow-2xl w-full max-w-md text-center"
         >
-            <h1 className="text-5xl font-extrabold mb-4 text-gray-800">Welcome</h1>
-            <p className="text-gray-600 mb-10 text-2xl">Create an account below</p>
+            <h1 className="text-4xl font-extrabold mb-4 text-blue-600">🧩 PuzzleBreaker</h1>
+            <p className="text-gray-600 mb-6 text-2xl">Create an account below</p>
 
             <div className="mb-6">
                 <input
