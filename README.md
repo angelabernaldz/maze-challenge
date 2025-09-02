@@ -43,9 +43,8 @@ To run **PuzzleBreaker**, you need the following:
 The backend runs inside Docker. Simply run Docker Compose to start the FastAPI server along with the PostgreSQL database. This sets up all necessary backend services automatically and will make the API available on `http://localhost:8001`.  
 
 ### Frontend
-The frontend is a React application built with Vite. Navigate to the `frontend` folder, install dependencies using `pnpm install`, and start the development server with `pnpm run dev`. The frontend will run on `http://localhost:5173` and connect to the backend automatically.  
+The frontend is a React application built with Vite. Navigate to the `app` folder, install dependencies using `pnpm install`, and start the development server with `pnpm run dev`. The frontend will run on `http://localhost:5173` and connect to the backend automatically.  
 
-> ⚠️ **Note:** For simplicity in this test project, we have included a `.env` file in the repo. Although it is not a best practice to commit environment variables, this allows you to run the project without manually setting all required environment variables.
-
-
-
+> ⚠️ **Note:** For simplicity in this test project, an `.env` file has been added to the repo. Although it is not a best practice to commit environment variables, this allows you to run the project without manually setting all required variables.  
+> 
+> You may still need to adjust some paths or settings, such as the local database connection or other environment-specific configurations, depending on your setup.
